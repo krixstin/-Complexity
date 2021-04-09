@@ -1,6 +1,7 @@
 var esprima = require("esprima");
 var options = {tokens:true, tolerant: true, loc: true, range: true };
 var fs = require("fs");
+const { stringify } = require("querystring");
 
 function main()
 {
@@ -33,7 +34,7 @@ function FunctionBuilder()
 	this.StartLine = 0;
 	this.FunctionName = "";
 	// The number of parameters for functions
-	this.ParameterCount  = 0,
+	this.ParameterCount  = 0 ,
 	// Number of if statements/loops + 1
 	this.SimpleCyclomaticComplexity = 0;
 	// The max depth of scopes (nested ifs, loops, etc)
@@ -121,12 +122,42 @@ function complexity(filePath)
 
 			builder.FunctionName = functionName(node);
 			builder.StartLine    = node.loc.start.line;
-
+			builder.ParameterCount = node.params.length;
 			builders[builder.FunctionName] = builder;
+			
+			traverseWithParents(node, function(node)
+			{
+				if(isDecision(node)){
+					builder.SimpleCyclomaticComplexity++;
+					// traverseWithParents(node,function(node){
+
+				var count=[];
+				var counter=0;
+				traverseWithParents(node, function(node){
+
+				if (node.type == 'LogicalExpression'){
+						counter++;
+					}	
+				});
+				count.push(counter);
+				
+				builder.MaxConditions=Math.max(count);
+
+				// })
+				}
+				
+			});
+	
+		}
+		if (node.type=== 'Literal') 
+		{
+			fileBuilder.Strings++;
 		}
 
-	});
+		
 
+	});
+	
 }
 
 // Helper function for counting children of node.
