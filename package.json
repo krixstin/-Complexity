@@ -17,11 +17,12 @@
   "author": "you",
   "license": "ISC",
   "devDependencies": {
+    "bob": "^2.5.0",
+    "chai": "^4.2.0",
     "escodegen": "^1.4.1",
     "esprima": "^4.0.0"
   },
   "dependencies": {
-    "chai": "^4.1.2",
     "mocha": "^6.0.0",
     "wheel": "^1.0.0"
   }

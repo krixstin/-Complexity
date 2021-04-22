@@ -1,6 +1,7 @@
 var esprima = require("esprima");
 var options = {tokens:true, tolerant: true, loc: true, range: true };
 var fs = require("fs");
+const { get } = require("http");
 const { stringify } = require("querystring");
 
 function main()
@@ -13,7 +14,7 @@ function main()
 	}
 	var filePath = args[0];
 	
-	
+
 	complexity(filePath);
 
 	// Report
@@ -101,6 +102,7 @@ function traverseWithParents(object, visitor)
     }
 }
 
+var final=0;
 function complexity(filePath)
 {
 	var buf = fs.readFileSync(filePath, "utf8");
@@ -153,12 +155,17 @@ function complexity(filePath)
 		if (node.type=== 'Literal') 
 		{
 			fileBuilder.Strings++;
-		}
-
-		
+		}	
 
 	});
-	
+	final= fileBuilder.Strings
+}
+
+// var mystery = require("./mystery.js");
+function getStrings()
+{
+	// string= complexity(mystery).Strings;
+	return final;
 }
 
 // Helper function for counting children of node.
@@ -307,4 +314,11 @@ remainder.toString() + " seconds";
 mints.toString().split(".")[0] + " " + szmin;
       }
   }
- exports.complexity = complexity;
+
+
+
+
+
+
+exports.complexity = complexity;
+exports.getStrings=getStrings;
