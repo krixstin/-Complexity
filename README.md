@@ -1,6 +1,10 @@
 
 # Complexity & Travis-CI Lab
 
+## Travis-CI Lab Submission
+![image](https://user-images.githubusercontent.com/55266110/115762464-8270e200-a371-11eb-804a-d0bedfbaa357.png)
+![image](https://user-images.githubusercontent.com/55266110/115762575-a0d6dd80-a371-11eb-9912-52649b1f80b4.png)
+
 In this lab, you'll be implementing simple algorithms for checking basic properties of code complexity, and working with Travis-CI for Continuous Integration.
 
 Two design patterns are of importance here:
